@@ -10,10 +10,10 @@ Gives your agent instant access to positions, quotes, fundamentals, news, earnin
 
 ```bash
 # Install the skill
-hermes skills install uzairansar/robinhood-agent-skill
+hermes skills install uzairansaruzi/robinhood-agent-skill/robinhood
 
 # Or use the tap system
-hermes skills tap add uzairansar/robinhood-agent-skill
+hermes skills tap add uzairansaruzi/robinhood-agent-skill
 hermes skills search robinhood
 hermes skills install robinhood
 ```
@@ -23,7 +23,7 @@ hermes skills install robinhood
 ```bash
 # Clone into your project's .claude/skills directory
 mkdir -p .claude/skills
-git clone https://github.com/uzairansar/robinhood-agent-skill.git .claude/skills/robinhood
+git clone https://github.com/uzairansaruzi/robinhood-agent-skill.git .claude/skills/robinhood
 ```
 
 ### Any Agent (Manual)
