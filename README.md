@@ -1,4 +1,4 @@
-# 📈 Robinhood Agent Skill
+# Robinhood Agent Skill
 
 A ready-to-use skill for [Hermes Agent](https://github.com/NousResearch/hermes-agent), [OpenClaw](https://github.com/open-claw/open-claw), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex CLI](https://github.com/openai/codex), and other MCP-compatible AI agents that provides read-only access to your Robinhood portfolio.
 
