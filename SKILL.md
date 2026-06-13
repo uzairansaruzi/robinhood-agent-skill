@@ -20,6 +20,7 @@ metadata:
           ROBINHOOD_TOTP_SECRET: "${ROBINHOOD_TOTP_SECRET}"
         timeout: 60
         connect_timeout: 30
+metadata.hermes.tags: []
 ---
 
 # Robinhood Portfolio Advisor
