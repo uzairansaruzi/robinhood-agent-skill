@@ -1,26 +1,16 @@
 ---
-name: robinhood
-description: Robinhood portfolio advisor — read-only access to positions, quotes, fundamentals, news, earnings, analyst ratings, dividends, and options via MCP. Includes cache-first strategy, entity page workflows, and optional Obsidian vault integration.
-version: 1.0.0
-author: Uzair Ansar
-license: MIT
+name: "robinhood"
+description: "Use when robinhood portfolio advisor \u2014 read-only access to positions, quotes, fundamentals, news, earnings, analyst ratings, dividends, and options via MCP. Includes cache-first strategy, entity page workflows, and optional Obsidian vault integration."
+version: "1.0.0"
+author: "Uzair Ansar"
+license: "MIT"
 metadata:
   hermes:
-    tags: [trading, portfolio, robinhood, options, investing, mcp, finance]
-    related_skills: [portfolio-obsidian-bridge, llm-wiki, obsidian]
+    tags: ["trading", "portfolio", "robinhood", "options", "investing", "mcp", "finance"]
+    related_skills: ["portfolio-obsidian-bridge", "llm-wiki", "obsidian"]
     requires_mcp: true
-    mcp_servers:
-      robinhood:
-        command: uvx
-        args:
-          - robinhood-mcp
-        env:
-          ROBINHOOD_USERNAME: "${ROBINHOOD_USERNAME}"
-          ROBINHOOD_PASSWORD: "${ROBINHOOD_PASSWORD}"
-          ROBINHOOD_TOTP_SECRET: "${ROBINHOOD_TOTP_SECRET}"
-        timeout: 60
-        connect_timeout: 30
----
+    mcp_servers: {"robinhood": {"command": "uvx", "args": ["robinhood-mcp"], "env": {"ROBINHOOD_USERNAME": "${ROBINHOOD_USERNAME}", "ROBINHOOD_PASSWORD": "${ROBINHOOD_PASSWORD}", "ROBINHOOD_TOTP_SECRET": "${ROBINHOOD_TOTP_SECRET}"}, "timeout": 60, "connect_timeout": 30}}
+----
 
 # Robinhood Portfolio Advisor
 
