@@ -1,11 +1,18 @@
 # SPYBOT Dashboard (research-only alpha)
 
-Open `dashboard/index.html` in a browser. This is a static, mobile-responsive dashboard with **no backend, live data feed, broker connection, or trade execution**.
+Run from the repository root:
+
+```bash
+python3 -m http.server 4173
+```
+
+Then open `http://localhost:4173/dashboard/` in a browser. This is a static, mobile-responsive dashboard with **no backend, live data feed, broker connection, or trade execution**.
 
 ## What works
 - SPY/QQQ research selectors and strategy model selectors (configuration only)
 - Capital/risk budget calculator
 - Client-side CSV import and a simple **underlying-price** opening-range breakout proxy, with explicit limitations
+- A bundled sample CSV (`dashboard/examples/spy_intraday_sample.csv`) you can run immediately from the UI
 - Data-integrity and strategy gate status display
 
 ## CSV input
