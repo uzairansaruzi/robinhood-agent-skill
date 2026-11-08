@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#18212b"><meta name="description" content="Periscope stock-price strategy research and review workspace for SPY and QQQ.">
+<title>Periscope | Strategy intelligence</title>
+<link rel="icon" href="mark.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+ <aside class="sidebar">
+  <a class="brand" href="#overview" aria-label="Periscope home"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 32V11h19v8H18v13M10 7h19M5 32h18"/><circle cx="26" cy="15" r="3"/></svg><span>PERISCOPE<small>INTELLIGENCE PLATFORM</small></span></a>
+  <div class="workspace-name">STRATEGY WORKSPACE<span>01 / RESEARCH</span></div>
+  <nav aria-label="Workspace views">
+   <a href="#overview" data-view="overview"><span>◫</span>Overview<i>01</i></a>
+   <a href="#rules" data-view="rules"><span>≡</span>Strategy rules<i>02</i></a>
+   <a href="#risk" data-view="risk"><span>◇</span>Risk controls<i>03</i></a>
+   <a href="#assumptions" data-view="assumptions"><span>⊞</span>Assumptions<i>04</i></a>
+   <a href="#quality" data-view="quality"><span>▥</span>Data quality<i>05</i></a>
+   <a href="#comparison" data-view="comparison"><span>↗</span>Performance<i>06</i></a>
+   <a href="#review" data-view="review"><span>☑</span>Review & sign-off<i>07</i></a>
+  </nav>
+  <div class="sidebar-bottom"><div class="scope">OHLC / ETF SHARES</div><p>Research, then review.<br>Every assumption visible.</p><a href="https://github.com/bferreal94cc/robinhood-agent-skill" target="_blank" rel="noreferrer">Project repository ↗</a><small>ENGINE 1.0.0 · SNAPSHOT 2026-11-08</small></div>
+ </aside>
+ <div class="workspace">
+  <header class="topbar"><span>Research lab <b>/</b> Strategy engine</span><div><span class="status">RESEARCH ONLY</span><label class="text-action workspace-import">Import workspace<input id="workspace-input" type="file" accept=".json,application/json" hidden></label><button id="export-workspace" class="text-action">Export workspace ↗</button></div></header>
+  <main id="main">
+   <div class="page-heading"><div><div class="eyebrow">PERISCOPE / PRICE RESEARCH</div><h1 id="view-title">Strategy review</h1><p id="view-subtitle">Turn a strategy outline into evidence you can inspect.</p></div><div class="review-state" id="approval-state">PENDING OWNER REVIEW</div></div>
+   <div class="notice" id="notice" role="status" aria-live="polite">Loading historical stock bars. No simulated results until data checks finish.</div>
+   <form id="simulation-form">
+    <div class="toolbar">
+     <label>Instrument<select name="ticker"><option>SPY</option><option>QQQ</option></select></label>
+     <label>From<input type="date" name="start" min="2026-04-01" max="2026-11-06"></label>
+     <label>Through<input type="date" name="end" min="2026-04-01" max="2026-11-06"></label>
+     <label class="strategy-select">Entry rule<select name="strategy"><option value="orb">Opening range continuation</option><option value="touch">Touch & Turn</option></select></label>
+     <button type="submit" id="run" class="run-action" disabled>Run simulation <span>↗</span></button>
+    </div>
+    <div class="scope-line"><span>STOCK-PRICE SIMULATION</span><span>1-minute OHLC</span><span>America/New_York</span><span>No options</span><span>No execution</span><span id="run-id" class="run-id">Awaiting first run</span></div>
+    <section class="view active" id="view-overview" aria-label="Overview">
+     <div class="metrics" id="metrics"></div>
+     <div class="overview-grid"><div class="chart-stack">
+      <article class="panel equity-panel"><div class="panel-header"><div><h2>Equity curve</h2><p>Net of configured fees and slippage</p></div><div class="legend"><span class="legend-line"></span><b id="chart-ticker">SPY</b><span class="benchmark-line"></span>Starting capital</div></div><div id="equity-chart" class="chart skeleton"><span>Validating dataset…</span></div><div class="chart-footer"><span id="period-label">Requested: May 06 – Nov 06, 2026</span><span>ETF share-price proxy</span></div></article>
+      <article class="panel drawdown-panel"><div class="panel-header"><h2>Drawdown</h2><small>Conservative intrabar maximum reported above; curve at daily close</small></div><div id="drawdown-chart" class="chart compact skeleton"></div></article>
+      <div class="summary-pair"><article class="panel"><div class="panel-header"><h2>Signal contract</h2><span class="tag">CANDIDATE</span></div><div id="signal-summary" class="panel-body"></div><a class="inline-link" href="#rules">Inspect definitions →</a></article><article class="panel"><div class="panel-header"><h2>Evidence health</h2><span id="health-tag" class="tag">CHECKING</span></div><div id="health-summary" class="panel-body"></div><a class="inline-link" href="#quality">Inspect dataset →</a></article></div>
+     </div>
+     <aside class="panel input-rail"><div class="panel-header"><h2>Simulation inputs</h2><span class="tag">EDITABLE</span></div><div class="fields">
+      <label>Starting equity ($)<input name="initial" type="number" min="100" max="10000000" step="100"></label>
+      <div class="field-pair"><label>Risk / trade (%)<input name="risk" type="number" min="0.01" max="5" step="0.01"></label><label>Capital cap (%)<input name="allocation" type="number" min="1" max="100" step="1"></label></div>
+      <label>Position direction<select name="direction"><option value="long">Long only · no borrowing</option><option value="both">Long & short · borrow assumed</option></select></label>
+      <label>Exit rule<select name="exitRule"><option value="bracket">Stop / target / session close</option><option value="range">Also exit on range re-entry</option></select></label>
+      <label>Stop & target model<select name="stopMode"><option value="structure">Strategy structure</option><option value="percent">Custom percentage bracket</option></select></label>
+      <div class="field-pair"><label>Stop-loss (%)<input name="stopLoss" type="number" min="0.01" max="10" step="0.01"></label><label>Take-profit (%)<input name="takeProfit" type="number" min="0.01" max="30" step="0.01"></label></div>
+      <label>ORB target (reward / risk)<input name="rr" type="number" min="0.1" max="10" step="0.1"></label>
+      <p class="helper" id="bracket-helper">Structural ORB: stop at opposite range edge. Touch & Turn: 38.2% inward target, 19.1% outward stop.</p>
+      <div class="field-pair"><label>Slippage / side (bps)<input name="slip" type="number" min="0" max="100" step="0.5"></label><label>Fee / share / side ($)<input name="fee" type="number" min="0" max="1" step="0.001"></label></div>
+      <label>Entry cutoff (ET)<input name="cutoff" type="time"></label>
+      <label class="check-line"><input name="midday" type="checkbox">Block 10:45–14:00 ET entries</label>
+      <a class="inline-link" href="#risk">All guardrails & filters →</a>
+     </div></aside></div>
+     <article class="panel trade-panel"><div class="panel-header"><div><h2>Trade log <span id="trade-count" class="muted">0 trades</span></h2><p>Every simulated fill, cost, and exit reason</p></div><div><button type="button" class="text-action" id="export-trades">Download CSV ↓</button></div></div><div class="table-wrap" id="trade-table"></div><div class="table-footer"><button type="button" id="trade-prev">← Previous</button><span id="trade-page">Page 1</span><button type="button" id="trade-next">Next →</button></div></article>
+    </section>
+    <section class="view" id="view-rules" aria-label="Strategy rules"><div class="rule-flow"><span>OBSERVE</span><b>→</b><span>CONFIRM</span><b>→</b><span>SIMULATE</span><b>→</b><span>INVALIDATE</span><b>→</b><span>REVIEW</span></div><div id="rules-content"></div><article class="panel"><div class="panel-header"><h2>Owner's strategy outline</h2><small>Editable review narrative; executable behavior is controlled by simulation inputs</small></div><div class="panel-body"><label>Strategy notes<textarea id="strategy-notes" rows="9"></textarea></label><p class="helper">Source: STRATEGY_SIGNOFF.md, version 1.0, November 8, 2026. Editing notes invalidates sign-off. Notes do not silently rewrite the engine.</p></div></article></section>
+    <section class="view" id="view-risk" aria-label="Risk controls"><div class="two-column"><article class="panel"><div class="panel-header"><h2>Capital protection</h2><span class="tag">ENFORCED</span></div><div class="fields"><div class="field-pair"><label>Daily loss budget (%)<input name="dailyLoss" type="number" min="0.1" max="20" step="0.1"></label><label>Max trades / day<input name="maxTrades" type="number" min="1" max="20" step="1"></label></div><div class="field-pair"><label>Pause after consecutive losses<input name="lossPause" type="number" min="1" max="10" step="1"></label><label>Cooldown (completed minutes)<input name="cooldown" type="number" min="0" max="60" step="1"></label></div><p class="helper">Risk sizing includes expected stop slippage and round-trip fees. Whole shares, capital capped at available equity. Gaps can exceed loss budgets.</p></div></article><article class="panel"><div class="panel-header"><h2>No-trade filters</h2><span class="tag">PRICE ONLY</span></div><div class="fields"><label>Minimum opening range / prior ATR<input name="minATR" type="number" min="0" max="5" step="0.01"></label><label>Maximum absolute opening gap (%)<input name="maxGap" type="number" min="0" max="50" step="0.1"></label><label>Excluded event dates (comma separated)<textarea name="eventDates" rows="3" placeholder="2026-06-17, 2026-09-16"></textarea></label><p class="helper">Event dates are manual exclusions. No live news, calendar, spread, flow, or volatility-index feed is implied.</p></div></article></div><article class="panel"><div class="panel-header"><h2>Non-negotiable simulation boundaries</h2></div><div class="boundary-list"><p><b>01</b>One simultaneous position per instrument run; SPY and QQQ are separate accounts, not a shared portfolio.</p><p><b>02</b>No first-15-minute entries, no overnight holds, and no automatic direction flips within a session.</p><p><b>03</b>Missing or malformed data blocks affected evidence. Conflicting same-bar stop and target resolves to the stop.</p><p><b>04</b>No broker connection, order placement, options pricing, premium modeling, or credential collection.</p></div></article></section>
+    <section class="view" id="view-assumptions" aria-label="Assumptions"><article class="panel document-panel"><div class="panel-header"><h2>What this exercise can establish</h2><span class="tag">READ BEFORE SIGN-OFF</span></div><div id="assumptions-content" class="panel-body"></div><div class="panel-body"><label>Research assumptions & decisions<textarea id="assumption-notes" rows="6"></textarea></label></div></article></section>
+    <section class="view" id="view-quality" aria-label="Data quality"><div class="two-column"><article class="panel"><div class="panel-header"><h2>Dataset provenance</h2><span class="tag">HISTORICAL</span></div><div class="panel-body" id="provenance"></div></article><article class="panel"><div class="panel-header"><h2>Import stock OHLC</h2></div><div class="panel-body"><p>Replace the selected instrument with your own licensed 1-minute data. Include at least 15 complete sessions before the requested start.</p><label>CSV file<input id="csv-input" type="file" accept=".csv,text/csv"></label><p class="helper">Required headers: timestamp,open,high,low,close. Timestamp must include Z or UTC offset. No volume or options fields used.</p><label>Source name<input id="csv-source" type="text" maxlength="120" placeholder="Provider / dataset version"></label><button type="button" id="restore-data" class="outline-action">Restore bundled dataset</button><p class="helper">Imported data remains in this tab and is included in the workspace JSON export. Reload restores bundled bars.</p></div></article></div><article class="panel"><div class="panel-header"><h2>Session coverage & exclusions</h2><span id="quality-count" class="muted"></span></div><div id="quality-summary" class="panel-body"></div><div class="table-wrap" id="quality-table"></div></article></section>
+    <section class="view" id="view-comparison" aria-label="Performance comparison"><div class="section-intro"><h2>One dataset. Four research runs.</h2><p>Both instruments and both candidates use the current risk settings, date range, and filters. Each starts with its own capital.</p></div><div class="table-wrap panel" id="comparison-table"></div><article class="panel"><div class="panel-header"><h2>Monthly performance</h2><small>May and November are partial periods in the six-month default window</small></div><div class="table-wrap" id="monthly-table"></div></article><article class="panel"><div class="panel-header"><h2>Cost sensitivity</h2><small>Selected strategy: base costs versus a higher-cost scenario</small></div><div id="sensitivity" class="panel-body"></div></article><div class="notice subdued">Exploratory in-sample comparisons. No untouched holdout or forward validation is claimed. Changing parameters reruns all four candidates.</div></section>
+    <section class="view" id="view-review" aria-label="Review and sign-off"><div class="two-column"><article class="panel"><div class="panel-header"><h2>Owner review checklist</h2><span id="check-progress" class="tag">0 / 8</span></div><div class="panel-body" id="review-checks"></div></article><article class="panel"><div class="panel-header"><h2>Decision record</h2><span class="tag">RESEARCH DEPLOYMENT</span></div><div class="panel-body"><p>Approval records a research review of this exact dataset, parameter set, and outline. It never authorizes live orders.</p><label>Reviewer name<input id="reviewer" type="text" maxlength="120" placeholder="Your name"></label><label>Review notes<textarea id="review-notes" rows="4"></textarea></label><button type="button" id="approve" class="approve-action" disabled>Record research sign-off</button><div id="decision-record" class="decision-record">Decision: PENDING</div><p class="helper">Browser-local record, not a verified electronic signature. Export to preserve it. Configuration or narrative edits invalidate approval.</p></div></article></div><article class="panel"><div class="panel-header"><h2>Validation evidence</h2></div><div id="test-report" class="panel-body"></div></article><article class="panel"><div class="panel-header"><h2>Parameter & review history</h2></div><div class="table-wrap" id="audit-table"></div></article></section>
+   </form>
+   <footer>PERISCOPE <span>Evidence before conviction.</span><span>Historical shares • Research-only • Browser-local workspace</span></footer>
+  </main>
+ </div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="app.mjs"></script>
+</body></html>

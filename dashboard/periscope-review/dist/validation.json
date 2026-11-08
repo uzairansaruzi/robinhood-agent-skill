@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "summary": "16 automated research-engine checks passed",
+  "checkedAt": "2026-11-08",
+  "engine": "1.0.0",
+  "checks": [
+    "Long and short stop-first ambiguity",
+    "Adverse gap-stop fills",
+    "Configuration validation",
+    "Missing-minute and duplicate rejection",
+    "Missing ATR blocks trades",
+    "129-session coverage for SPY and QQQ",
+    "Whole-share capital cap",
+    "No overnight positions",
+    "Entry timing and midday filter",
+    "One position at a time",
+    "Daily trade count cap",
+    "P&L and monthly accounting",
+    "Future OHLC perturbation invariance",
+    "Manual event exclusions",
+    "Target-bar adverse excursion retained in drawdown"
+  ],
+  "limits": "Automated checks validate implemented mechanics and accounting. They do not validate provider truth, licensing, predictive profitability, untouched holdout, or completed forward-paper performance. Independent AI code review performed; human owner approval is pending."
+}
