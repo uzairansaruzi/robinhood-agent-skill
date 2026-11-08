@@ -3,6 +3,9 @@ name: Refresh Robinhood Cache
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   refresh-cache:
     runs-on: ubuntu-latest
