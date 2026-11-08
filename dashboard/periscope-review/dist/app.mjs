@@ -11,7 +11,7 @@ const checklist=[
  ['Risk limits approved','Position sizing, daily budget, cooldown, and loss pause reviewed.'],
  ['Provider and licensing reviewed','Data rights and raw adjustment basis confirmed by owner.'],
  ['Historical coverage reviewed','Complete requested sessions and prior ATR warmup inspected.'],
- ['Backtest and cost sensitivity reviewed','Trade log, drawdown, and doubled-cost stress inspected.'],
+ ['Backtest and cost sensitivity reviewed','Trade log, drawdown, and higher-cost stress inspected.'],
  ['Independent validation reviewed','Automated checks and limitations reviewed; not a live certification.'],
  ['Holdout / forward plan recorded','Record a separate untouched holdout and 30–60-day paper evaluation plan in notes.'],
  ['Research-only deployment approved','No broker orders or options performance authorized.']
