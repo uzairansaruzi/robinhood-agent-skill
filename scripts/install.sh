@@ -110,17 +110,17 @@ fi
 # ---------------------------------------------------------------------------
 # 3. Get credentials
 # ---------------------------------------------------------------------------
-RH_USERNAME="${ROBINHOOD_USERNAME:-}"
-RH_PASSWORD="${ROBINHOOD_PASSWORD:-}"
+RH_USERNAME="${ROBINHOOD_USERNAME:-${Robinhood_USERNAME:-}}"
+RH_PASSWORD="${ROBINHOOD_PASSWORD:-${Robinhood_PASSWORD:-}}"
 RH_TOTP_SECRET="${ROBINHOOD_TOTP_SECRET:-}"
 
 if [[ "$SKIP_CREDENTIALS" == "true" ]]; then
   warn "Skipping credential setup. Configure manually later."
-  warn "Set ROBINHOOD_USERNAME, ROBINHOOD_PASSWORD, and optional ROBINHOOD_TOTP_SECRET."
+  warn "Set ROBINHOOD_USERNAME/Robinhood_USERNAME, ROBINHOOD_PASSWORD/Robinhood_PASSWORD, and optional ROBINHOOD_TOTP_SECRET."
 else
   if [[ "$NON_INTERACTIVE" == "true" ]]; then
-    [[ -z "$RH_USERNAME" ]] && warn "ROBINHOOD_USERNAME not set"
-    [[ -z "$RH_PASSWORD" ]] && warn "ROBINHOOD_PASSWORD not set"
+    [[ -z "$RH_USERNAME" ]] && warn "ROBINHOOD_USERNAME or Robinhood_USERNAME not set"
+    [[ -z "$RH_PASSWORD" ]] && warn "ROBINHOOD_PASSWORD or Robinhood_PASSWORD not set"
   else
     if [[ -z "$RH_USERNAME" ]]; then
       echo -n "Robinhood email: "
@@ -371,7 +371,7 @@ print('Added robinhood MCP config')
     cp "$SKILL_SOURCE/templates/claude-desktop.json" "$DESKTOP_CONFIG"
     # Replace placeholder credentials
     if command -v sed &>/dev/null; then
-      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$DESKTOP_CONFIG"
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g; s/Robinhood_USERNAME/${RH_USERNAME}/g; s/Robinhood_PASSWORD/${RH_PASSWORD}/g" "$DESKTOP_CONFIG"
       rm -f "${DESKTOP_CONFIG}.bak"
     fi
   fi
@@ -392,7 +392,7 @@ configure_codex() {
   else
     cp "$SKILL_SOURCE/templates/codex.json" "$CODEX_CONFIG"
     if command -v sed &>/dev/null; then
-      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$CODEX_CONFIG"
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g; s/Robinhood_USERNAME/${RH_USERNAME}/g; s/Robinhood_PASSWORD/${RH_PASSWORD}/g" "$CODEX_CONFIG"
       rm -f "${CODEX_CONFIG}.bak"
     fi
   fi
@@ -436,7 +436,7 @@ configure_cline() {
   else
     cp "$SKILL_SOURCE/templates/cline-mcp.json" "$CLINE_MCP"
     if command -v sed &>/dev/null; then
-      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$CLINE_MCP"
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g; s/Robinhood_USERNAME/${RH_USERNAME}/g; s/Robinhood_PASSWORD/${RH_PASSWORD}/g" "$CLINE_MCP"
       rm -f "${CLINE_MCP}.bak"
     fi
   fi
@@ -457,7 +457,7 @@ configure_windsurf() {
   else
     cp "$SKILL_SOURCE/templates/windsurf-mcp.json" "$WINDSURF_DIR/mcp.json"
     if command -v sed &>/dev/null; then
-      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$WINDSURF_DIR/mcp.json"
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g; s/Robinhood_USERNAME/${RH_USERNAME}/g; s/Robinhood_PASSWORD/${RH_PASSWORD}/g" "$WINDSURF_DIR/mcp.json"
       rm -f "$WINDSURF_DIR/mcp.json.bak"
     fi
   fi

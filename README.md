@@ -74,8 +74,8 @@ Add to `claude_desktop_config.json`:
       "command": "uvx",
       "args": ["robinhood-mcp"],
       "env": {
-        "ROBINHOOD_USERNAME": "your_email",
-        "ROBINHOOD_PASSWORD": "your_password"
+        "ROBINHOOD_USERNAME": "Robinhood_USERNAME",
+        "ROBINHOOD_PASSWORD": "Robinhood_PASSWORD"
       }
     }
   }

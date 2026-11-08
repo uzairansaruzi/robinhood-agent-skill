@@ -14,8 +14,8 @@ The script can run standalone with robin_stocks OR be called by an agent
 after fetching data via MCP tools (use refresh_from_mcp_data()).
 
 Environment Variables:
-  ROBINHOOD_USERNAME  - Required for direct robin_stocks login
-  ROBINHOOD_PASSWORD  - Required for direct robin_stocks login
+  ROBINHOOD_USERNAME or Robinhood_USERNAME  - Required for direct robin_stocks login
+  ROBINHOOD_PASSWORD or Robinhood_PASSWORD  - Required for direct robin_stocks login
   ROBINHOOD_TOTP_SECRET  - Optional, for authenticator app 2FA
   ROBINHOOD_CACHE_DIR    - Override default cache directory
   ROBINHOOD_VAULT_PATH   - Override default Obsidian vault path
@@ -382,7 +382,7 @@ def refresh_via_robin_stocks(cache_file: Path, cache_dir: Path, vault_path: Path
     """
     Direct refresh using robin_stocks (no MCP needed).
     Requires: pip install robin_stocks pyotp
-    Env vars: ROBINHOOD_USERNAME, ROBINHOOD_PASSWORD, ROBINHOOD_TOTP_SECRET (optional)
+    Env vars: ROBINHOOD_USERNAME/Robinhood_USERNAME, ROBINHOOD_PASSWORD/Robinhood_PASSWORD, ROBINHOOD_TOTP_SECRET (optional)
     """
     try:
         import robin_stocks.robinhood as rh
@@ -390,12 +390,12 @@ def refresh_via_robin_stocks(cache_file: Path, cache_dir: Path, vault_path: Path
         print("ERROR: robin_stocks not installed. Run: pip install robin_stocks")
         sys.exit(1)
 
-    username = os.environ.get("ROBINHOOD_USERNAME")
-    password = os.environ.get("ROBINHOOD_PASSWORD")
+    username = os.environ.get("ROBINHOOD_USERNAME") or os.environ.get("Robinhood_USERNAME")
+    password = os.environ.get("ROBINHOOD_PASSWORD") or os.environ.get("Robinhood_PASSWORD")
     totp_secret = os.environ.get("ROBINHOOD_TOTP_SECRET")
 
     if not username or not password:
-        print("ERROR: Set ROBINHOOD_USERNAME and ROBINHOOD_PASSWORD env vars")
+        print("ERROR: Set ROBINHOOD_USERNAME/Robinhood_USERNAME and ROBINHOOD_PASSWORD/Robinhood_PASSWORD env vars")
         sys.exit(1)
 
     # Login
