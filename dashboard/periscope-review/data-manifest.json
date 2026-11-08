@@ -1,0 +1,146 @@
+[
+  {
+    "file": "QQQ-10.json",
+    "sha256": "dfc215ccbd66bfc56c3aa8cc1959c3740be261d136b45943392ec7e5bd93da3d",
+    "ticker": "QQQ",
+    "rows": 8580,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "QQQ-11.json",
+    "sha256": "6acfaf633b8cb2c36e83a044e0cd698a8f83b9eafce84ab33d790d8548bfb416",
+    "ticker": "QQQ",
+    "rows": 1950,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "QQQ-4.json",
+    "sha256": "822e81d3a61c9db9b668cf43c3cf309278e7d11d8c22184b4681420e21ad71a8",
+    "ticker": "QQQ",
+    "rows": 8190,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "QQQ-5.json",
+    "sha256": "8595c2738ffe86b7542493949726b5ee11d9f58eb2407210095b667e7c665825",
+    "ticker": "QQQ",
+    "rows": 7800,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "QQQ-6.json",
+    "sha256": "2fc4a8989613791fd04dbbb69f4668d41ad09173f691ad5fc2424633d4e40e66",
+    "ticker": "QQQ",
+    "rows": 8190,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "QQQ-7.json",
+    "sha256": "7f40fef345a103c7f0c799d0136d453f6001e7549007a42807c1f48f0c1f8703",
+    "ticker": "QQQ",
+    "rows": 8580,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "QQQ-8.json",
+    "sha256": "ddb4c5b6f42e2ec7fc6cfe1bb6e963c215784cd4e5aeb78d293be805123aadd6",
+    "ticker": "QQQ",
+    "rows": 8190,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "QQQ-9.json",
+    "sha256": "b1d4bf247644b5b731465209b26db41b1d869e3d280fce6e33557621df174ace",
+    "ticker": "QQQ",
+    "rows": 8190,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "SPY-10.json",
+    "sha256": "c1cd50d30d5d233412c99ae0e7130034ff72dd968f4fdca63f6fa7c553a89262",
+    "ticker": "SPY",
+    "rows": 8580,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "SPY-11.json",
+    "sha256": "664c52f00982be550362cb7caf9e07c460cc4a06dc0f5589a4186d9ee865c9f6",
+    "ticker": "SPY",
+    "rows": 1950,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "SPY-4.json",
+    "sha256": "f7c3d2bad1166512e1d2b4662dd3a0301f3be5e3ce209f816a79e4753b725c26",
+    "ticker": "SPY",
+    "rows": 8190,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "SPY-5.json",
+    "sha256": "cf660aabc886395171cc02ab5703a35ddf3d083614f94c4a6366f3032161ae16",
+    "ticker": "SPY",
+    "rows": 7800,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "SPY-6.json",
+    "sha256": "d9e1a4a8e627112f6ed6356bda2e119529dbaea0612e4440acfd0971de879498",
+    "ticker": "SPY",
+    "rows": 8190,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "SPY-7.json",
+    "sha256": "4362ff1e67e76d587d920f05047c90292a2f4420eda0dcee9e97d71fe7fb21ea",
+    "ticker": "SPY",
+    "rows": 8580,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "SPY-8.json",
+    "sha256": "e8f8bb350e3f17be66e9f4aee1eb3621883e78ff911eecca1d1df5b974bdec06",
+    "ticker": "SPY",
+    "rows": 8190,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  },
+  {
+    "file": "SPY-9.json",
+    "sha256": "2b4d483284b359fcb047fd38c830f86c7b10d422fd64ad4171d92d27f21ecbae",
+    "ticker": "SPY",
+    "rows": 8190,
+    "feed": "sip",
+    "source": "Alpaca SIP historical via connected data tool",
+    "retrieved": "2026-11-08"
+  }
+]
