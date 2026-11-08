@@ -179,6 +179,15 @@ python3 scripts/refresh_cache.py --json-only
 - ✅ **Session tokens cached locally** — `~/.tokens/robinhood.pickle`
 - ⚠️ **Unofficial API** — uses `robin_stocks` which may break if Robinhood changes their API
 
+## Agent Rulesets (Codex + Copilot)
+
+This repo includes baseline ruleset files that agents can follow:
+
+- `AGENTS.md` (agent instructions for Codex/Copilot agents)
+- `.github/copilot-instructions.md` (repository-wide Copilot instructions)
+- `.github/instructions/*.instructions.md` (path-specific Copilot instructions)
+- `RULESETS.md` (how to copy these files into other repositories)
+
 ## Example Prompts
 
 Once set up, ask your agent:
@@ -198,7 +207,12 @@ Once set up, ask your agent:
 robinhood-agent-skill/
 ├── SKILL.md                    # Agent-readable skill document
 ├── README.md                   # This file
+├── AGENTS.md                   # Agent rules for Codex/Copilot
+├── RULESETS.md                 # How to reuse rulesets across repositories
 ├── LICENSE                     # MIT
+├── .github/
+│   ├── copilot-instructions.md # Repository-wide Copilot instructions
+│   └── instructions/           # Path-specific Copilot instructions
 ├── scripts/
 │   ├── refresh_cache.py        # Portfolio cache refresh + Obsidian snapshots
 │   └── install.sh              # One-click setup script
