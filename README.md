@@ -45,6 +45,20 @@ export ROBINHOOD_PASSWORD="your_password"
 export ROBINHOOD_TOTP_SECRET="your_totp_secret"
 ```
 
+### GitHub Actions Secrets
+
+If you run `scripts/refresh_cache.py` in GitHub Actions, add these repository secrets:
+
+- `ROBINHOOD_USERNAME` (required)
+- `ROBINHOOD_PASSWORD` (required)
+- `ROBINHOOD_TOTP_SECRET` (optional)
+
+This repo includes `.github/workflows/refresh-robinhood-cache.yml`, which reads those secrets and runs:
+
+```bash
+python scripts/refresh_cache.py --json-only --force
+```
+
 ### Hermes Agent
 
 Add to `~/.hermes/config.yaml`:
