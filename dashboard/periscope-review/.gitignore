@@ -1,0 +1,12 @@
+*.log
+.env
+.env.*
+!.env.example
+.sites/
+.openai/local/
+node_modules/
+*.zip
+__pycache__/
+
+# Licensed snapshots stay private; use CSV imports or fetch locally.
+dist/data/*.json

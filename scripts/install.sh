@@ -24,6 +24,7 @@ RESET='\033[0m'
 info()  { echo -e "${BLUE}ℹ${RESET} $*"; }
 ok()    { echo -e "${GREEN}✓${RESET} $*"; }
 warn()  { echo -e "${YELLOW}⚠${RESET} $*"; }
+dim()   { echo -e "${DIM}$*${RESET}"; }
 fail()  { echo -e "${RED}✗${RESET} $*"; exit 1; }
 
 # ---------------------------------------------------------------------------
@@ -83,7 +84,7 @@ fi
 
 # Check for Node.js (needed by some agents for MCP)
 if command -v node &>/dev/null; then
-  DIM "Node.js found: $(node --version)"
+  dim "Node.js found: $(node --version)"
 else
   warn "Node.js not found. Some agents require it for MCP subprocess management."
 fi
@@ -110,17 +111,17 @@ fi
 # ---------------------------------------------------------------------------
 # 3. Get credentials
 # ---------------------------------------------------------------------------
-RH_USERNAME="${ROBINHOOD_USERNAME:-}"
-RH_PASSWORD="${ROBINHOOD_PASSWORD:-}"
+RH_USERNAME="${ROBINHOOD_USERNAME:-${Robinhood_USERNAME:-}}"
+RH_PASSWORD="${ROBINHOOD_PASSWORD:-${Robinhood_PASSWORD:-}}"
 RH_TOTP_SECRET="${ROBINHOOD_TOTP_SECRET:-}"
 
 if [[ "$SKIP_CREDENTIALS" == "true" ]]; then
   warn "Skipping credential setup. Configure manually later."
-  warn "Set ROBINHOOD_USERNAME, ROBINHOOD_PASSWORD, and optional ROBINHOOD_TOTP_SECRET."
+  warn "Set ROBINHOOD_USERNAME/Robinhood_USERNAME, ROBINHOOD_PASSWORD/Robinhood_PASSWORD, and optional ROBINHOOD_TOTP_SECRET."
 else
   if [[ "$NON_INTERACTIVE" == "true" ]]; then
-    [[ -z "$RH_USERNAME" ]] && warn "ROBINHOOD_USERNAME not set"
-    [[ -z "$RH_PASSWORD" ]] && warn "ROBINHOOD_PASSWORD not set"
+    [[ -z "$RH_USERNAME" ]] && warn "ROBINHOOD_USERNAME or Robinhood_USERNAME not set"
+    [[ -z "$RH_PASSWORD" ]] && warn "ROBINHOOD_PASSWORD or Robinhood_PASSWORD not set"
   else
     if [[ -z "$RH_USERNAME" ]]; then
       echo -n "Robinhood email: "
@@ -203,14 +204,8 @@ configure_hermes() {
     if grep -q "robinhood:" "$CONFIG_FILE" 2>/dev/null; then
       ok "Robinhood MCP already configured in config.yaml"
     else
-      # Append MCP config
-      mkdir -p "$HERMES_DIR"
-      echo "" >> "$CONFIG_FILE"
-      echo "# Robinhood MCP Server (added by robinhood-agent-skill)" >> "$CONFIG_FILE"
-      echo "mcp_servers:" >> "$CONFIG_FILE"
-      # Check if mcp_servers section exists
+      # Merge into existing config if mcp_servers exists
       if grep -q "^mcp_servers:" "$CONFIG_FILE" 2>/dev/null; then
-        # Insert under existing mcp_servers
         python3 -c "
 import yaml, sys
 with open('$CONFIG_FILE', 'r') as f:
@@ -232,8 +227,10 @@ with open('$CONFIG_FILE', 'w') as f:
 print('Added robinhood MCP config')
 " 2>/dev/null || warn "Could not auto-merge config. Add manually (see templates/)"
       else
-        # New config file or no mcp_servers section
-        cat >> "$CONFIG_FILE" << 'YAML_EOF'
+        # Existing config file without mcp_servers section
+        cat >> "$CONFIG_FILE" << YAML_EOF
+
+mcp_servers:
   robinhood:
     command: uvx
     args:
@@ -260,7 +257,7 @@ mcp_servers:
       ROBINHOOD_USERNAME: "${RH_USERNAME}"
       ROBINHOOD_PASSWORD: "${RH_PASSWORD}"
     timeout: 60
-    connect_connect: 30
+    connect_timeout: 30
 YAML_EOF
     ok "Created new config.yaml with robinhood MCP config"
   fi
@@ -371,7 +368,7 @@ print('Added robinhood MCP config')
     cp "$SKILL_SOURCE/templates/claude-desktop.json" "$DESKTOP_CONFIG"
     # Replace placeholder credentials
     if command -v sed &>/dev/null; then
-      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$DESKTOP_CONFIG"
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g; s/Robinhood_USERNAME/${RH_USERNAME}/g; s/Robinhood_PASSWORD/${RH_PASSWORD}/g" "$DESKTOP_CONFIG"
       rm -f "${DESKTOP_CONFIG}.bak"
     fi
   fi
@@ -392,7 +389,7 @@ configure_codex() {
   else
     cp "$SKILL_SOURCE/templates/codex.json" "$CODEX_CONFIG"
     if command -v sed &>/dev/null; then
-      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$CODEX_CONFIG"
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g; s/Robinhood_USERNAME/${RH_USERNAME}/g; s/Robinhood_PASSWORD/${RH_PASSWORD}/g" "$CODEX_CONFIG"
       rm -f "${CODEX_CONFIG}.bak"
     fi
   fi
@@ -417,6 +414,10 @@ configure_opencode() {
     warn "OpenCode config exists. Add MCP config manually from templates/opencode.json"
   else
     cp "$SKILL_SOURCE/templates/opencode.json" "$OPENCODE_CONFIG"
+    if command -v sed &>/dev/null; then
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$OPENCODE_CONFIG"
+      rm -f "${OPENCODE_CONFIG}.bak"
+    fi
   fi
 
   ok "OpenCode configured"
@@ -436,7 +437,7 @@ configure_cline() {
   else
     cp "$SKILL_SOURCE/templates/cline-mcp.json" "$CLINE_MCP"
     if command -v sed &>/dev/null; then
-      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$CLINE_MCP"
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g; s/Robinhood_USERNAME/${RH_USERNAME}/g; s/Robinhood_PASSWORD/${RH_PASSWORD}/g" "$CLINE_MCP"
       rm -f "${CLINE_MCP}.bak"
     fi
   fi
@@ -457,7 +458,7 @@ configure_windsurf() {
   else
     cp "$SKILL_SOURCE/templates/windsurf-mcp.json" "$WINDSURF_DIR/mcp.json"
     if command -v sed &>/dev/null; then
-      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g" "$WINDSURF_DIR/mcp.json"
+      sed -i.bak "s/your_email/${RH_USERNAME}/g; s/your_password/${RH_PASSWORD}/g; s/Robinhood_USERNAME/${RH_USERNAME}/g; s/Robinhood_PASSWORD/${RH_PASSWORD}/g" "$WINDSURF_DIR/mcp.json"
       rm -f "$WINDSURF_DIR/mcp.json.bak"
     fi
   fi
